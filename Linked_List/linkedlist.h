@@ -1,3 +1,6 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
 #include <iostream>
 #include <initializer_list>
 #include <string>
@@ -164,3 +167,5 @@ template <typename T> std::string List<T>::to_string() const {
     result += "}";
     return result;
 }
+
+#endif

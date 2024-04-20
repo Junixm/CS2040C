@@ -1,6 +1,3 @@
-﻿#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
-
 #include <iostream>
 #include <initializer_list>
 #include <string>
@@ -17,42 +14,29 @@ private:
 
 public:
     List();
-
     List(std::initializer_list<T> init_list);
-
     List(const List<T>& other);
-
     ~List();
 
     const T& head();
-
     bool empty() const;
-
     size_t size() const;
 
     void push_head(const T& element);
-
     void pop_head();
-
     bool contains(const T& element) const;
-
     T extract_max();
-
     void reverse();
 
     template <typename U> std::string convert_string(const U element) const;
-
     std::string convert_string(const std::string element) const;
-
     std::string convert_string(const char element) const;
-
     std::string to_string() const;
-
 };
 
-template <typename T> List<T>::List() : m_size{ 0 }, m_head{ nullptr } {}
+template <typename T> List<T>::List() : m_size(0), m_head(nullptr) {}
 
-template <typename T> List<T>::List(std::initializer_list<T> init_list) : m_size{ 0 }, m_head{ nullptr } {
+template <typename T> List<T>::List(std::initializer_list<T> init_list) : m_size(0), m_head(nullptr) {
     auto it = init_list.end();
     while (--it != init_list.begin()) {
         push_head(*it);
@@ -60,7 +44,7 @@ template <typename T> List<T>::List(std::initializer_list<T> init_list) : m_size
     push_head(*it);
 }
 
-template <typename T> List<T>::List(const List<T>& other) : m_size{ 0 }, m_head{ nullptr } {
+template <typename T> List<T>::List(const List<T>& other) : m_size(0), m_head(nullptr) {
     Node<T>* current = other.m_head;
     while (current != nullptr) {
         push_head(current->element);
@@ -180,5 +164,3 @@ template <typename T> std::string List<T>::to_string() const {
     result += "}";
     return result;
 }
-
-#endif

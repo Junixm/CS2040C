@@ -1,12 +1,9 @@
-#ifndef TREE_H
-#define TREE_H
+#pragma once
 
 #include <algorithm>
 #include <cassert>
 #include <functional>
 #include <string>
-
-using std::string;
 
 template <typename T>
 std::string my_to_string(const T& t) {
@@ -35,10 +32,6 @@ private:
   size_t m_size;
   Node<T> *m_root;
 public:
-  // Rule of three:
-  // If a class requires a user-defined destructor, a user-defined copy
-  // constructor, or a user-defined copy assignment operator, it almost
-  // certainly requires all three.
   Tree(); // Constructor
   ~Tree(); // Destructor
   Node<T> *root(); // Returns a pointer to the root
@@ -50,15 +43,15 @@ public:
   T max() const; // Returns the maximum element
   T min() const; // Returns the minimum element
   T successor(T element);  // Returns the successor of the specified element
-  string pre_order(); // Convert each element in the tree to string in pre-order.
-  string in_order(); // Convert each element in the tree to string in order.
-  string post_order(); // Convert each element in the tree to string in post-order.
-  string to_string(bool with_height = true) const { // Returns a string equivalent of the tree
+  std::string pre_order(); // Convert each element in the tree to string in pre-order.
+  std::string in_order(); // Convert each element in the tree to string in order.
+  std::string post_order(); // Convert each element in the tree to string in post-order.
+  std::string to_string(bool with_height = true) const { // Returns a string equivalent of the tree
     return m_to_string(with_height, m_root, 0);
   }
 private:
-  string m_to_string(bool with_height, Node<T> *node, int ident) const {
-    string res;
+  std::string m_to_string(bool with_height, Node<T> *node, int ident) const {
+    std::string res;
     if (node == nullptr) {
       return res;
     }
@@ -285,31 +278,31 @@ template <typename T> T Tree<T>::successor(T element) {
   return next->element; 
 }
 template <typename T>
-string _pre_order(Node<T> *node) {
+std::string _pre_order(Node<T> *node) {
   return my_to_string(node->element)
     + (node->left == nullptr ? "" : " " + _pre_order(node->left))
     + (node->right == nullptr ? "" : " " + _pre_order(node->right));
 }
 template <typename T>
-string Tree<T>::pre_order() {
+std::string Tree<T>::pre_order() {
   if (m_root == nullptr) {
     return "";
   }
   return _pre_order(m_root);
 }
 template <typename T>
-string Tree<T>::in_order() {
+std::string Tree<T>::in_order() {
   if (m_root == nullptr) {
     return "";
   }
   return _in_order(m_root);
 }
 template <typename T>
-string _in_order(Node<T> *node) {
+std::string _in_order(Node<T> *node) {
   if(node == nullptr){
     return "";
   }
-  string order = _in_order(node->left);
+  std::string order = _in_order(node->left);
   if(!order.empty()){
     order += " ";
   }
@@ -321,18 +314,18 @@ string _in_order(Node<T> *node) {
   return order;
 }
 template <typename T>
-string Tree<T>::post_order() {
+std::string Tree<T>::post_order() {
   if (m_root == nullptr) {
     return "";
   }
   return _post_order(m_root);
 }
 template <typename T>
-string _post_order(Node<T> *node) {
+std::string _post_order(Node<T> *node) {
   if(node == nullptr){
     return "";
   }
-  string order = _post_order(node->left);
+  std::string order = _post_order(node->left);
   if(!order.empty()){
     order += " ";
   }
@@ -343,4 +336,3 @@ string _post_order(Node<T> *node) {
   order += my_to_string(node->element);
   return order;
 }
-#endif

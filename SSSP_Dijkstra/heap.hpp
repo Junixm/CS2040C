@@ -1,11 +1,7 @@
 #pragma once
+
 #include <math.h>
-
 #include <iostream>
-using namespace std;
-
-#ifndef HEAPHPP
-#define HEAPHPP
 
 #define DEFAULTHEAPSIZE 1023
 
@@ -125,9 +121,9 @@ T Heap<T>::peekMax() const {
 template <class T>
 void Heap<T>::printHeapArray() const {
   for (int i = 0; i < size(); i++) {
-    cout << _heap[i].vertex() << " ";
+    std::cout << _heap[i] << " ";
   }
-  cout << endl;
+  std::cout << std::endl;
 }
 
 template <class T>
@@ -175,30 +171,28 @@ void Heap<T>::printTree() const {
     index--;
     tempIndex = index;
     while (index < size() && index < endIndex) {
-      for (i = 0; i < space - 1; i++) cout << " ";
+      for (i = 0; i < space - 1; i++) std::cout << " ";
       if (index == 0)
-        cout << "|";
+        std::cout << "|";
       else if (parity)
-        cout << "\\";
+        std::cout << "\\";
       else
-        cout << "/";
+        std::cout << "/";
       parity = !parity;
-      for (i = 0; i < space; i++) cout << " ";
+      for (i = 0; i < space; i++) std::cout << " ";
       index++;
     }
-    cout << endl;
+    std::cout << std::endl;
     index = tempIndex;
     while (index < size() && index < endIndex) {
       for (i = 0; i < (space - 1 - ((int)log10(_heap[index]))); i++)
-        cout << " ";
-      cout << _heap[index];
-      for (i = 0; i < space; i++) cout << " ";
+        std::cout << " ";
+      std::cout << _heap[index];
+      for (i = 0; i < space; i++) std::cout << " ";
       index++;
     }
 
-    cout << endl;
+    std::cout << std::endl;
     space /= 2;
   }
 }
-
-#endif
